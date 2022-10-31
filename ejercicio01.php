@@ -91,9 +91,9 @@ $errores = insertarLibros(conectarbd());
 
 
 
-<!--Métodos-->
+<!--Funciones-->
 <?php
-
+//retorna msqli object o error
 function conectarbd()
 {
     //si existe un error en los parámetros del constructor delobjeto msqli lanza un error fatal controlado con try-catch
@@ -105,7 +105,7 @@ function conectarbd()
         die("Se ha producido un error al conectar a la base de datos: <br>Error: <code style=\"color: red;\">" . $e->getMessage() .  "</code>");
     }
 }
-
+//inserta libros y si hay error los va guardando en la variable $error y la retorna al final
 function insertarLibros($conexion)
 {
 
@@ -181,7 +181,7 @@ function insertarLibros($conexion)
     //retorno cadena con los errores
     return $error;
 }
-
+//retorna los libros en formato tabla o error
 function obtenerLibros($conexion)
 {
     try {
@@ -213,10 +213,10 @@ function obtenerLibros($conexion)
         return $tablaLibros = "<tr><td colspan=\"4\">No hay libros en la base de datos</td></tr>";
     }
 }
-
+//retorna los libros en formato tabla o error
 function obtenerLibrosDesc($conexion)
 {
-    //obtenerLibrosDesc() funciona igual que el método obtenerLibros() pero ordena los libros por título desc
+    //obtenerLibrosDesc() funciona igual que el función obtenerLibros() pero ordena los libros por título desc
 
     try {
         $consulta = $conexion->query("SELECT * FROM libros ORDER BY titulo DESC ");
@@ -240,10 +240,10 @@ function obtenerLibrosDesc($conexion)
         return $tablaLibrosDesc = "<tr><td colspan=\"4\">No hay libros en la base de datos</td></tr>";
     }
 }
-
+//retorna los libros en formato tabla o error
 function obtenerLibrosBowling($conexion)
 {
-    //obtenerLibrosBowling() funciona igual que el método obtenerLibros() pero filtra solo libros de JK Bowling
+    //obtenerLibrosBowling() funciona igual que el función obtenerLibros() pero filtra solo libros de JK Bowling
 
     try {
         $consulta = $conexion->query("SELECT titulo, paginas FROM libros WHERE autor='JK Bowling'");
@@ -265,7 +265,7 @@ function obtenerLibrosBowling($conexion)
         return $tablaLibrosBowling = "<tr><td colspan=\"4\">No hay libros en la base de datos de JK Bowling</td></tr>";
     }
 }
-
+//elimina los libros o error
 function eliminaLibrosBowling($conexion)
 {
 
@@ -289,7 +289,7 @@ function eliminaLibrosBowling($conexion)
         $conexion->close();
     }
 }
-
+//actualiza libro o error
 function actualizaLibro($conexion)
 {
     try {

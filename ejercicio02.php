@@ -63,7 +63,7 @@ if (!empty($_POST['id']) && !empty($_POST['titulo']) && !empty($_POST['autor']) 
                     <th>AUTHOR</th>
                     <th>PAGINAS</th>
                     <?php
-                    //Si no hay errores imprime los libros en la taba; Inicialmente está vacia si la bbdd está vacia
+                    //Inicialmente está vacia si la bbdd está vacia; Si no hay errores imprime los libros en la taba
                     echo empty($_GET['error']) ? cargaLibros(conexion()) : "";
                     ?>
                 </tr>
