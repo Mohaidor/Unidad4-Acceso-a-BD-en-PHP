@@ -11,11 +11,10 @@
 <body style="background-color: darkgray">
     <h1>Mis Libros</h1>
     <form action="" method="GET">
-
         <input type="text" name="titulo">
         <input type="submit" name="submit" value="Buscar">
         <?php if (isset($_GET['submit']) && empty($_GET['titulo'])) {
-            echo "<span style='color:red;'>¡Intoduce un título!</span>";
+            echo "<span style='color:red;'> <code><--</code>¡Intoduce el título!</span>";
         } ?>
     </form>
     <br>

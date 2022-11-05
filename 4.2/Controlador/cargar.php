@@ -13,7 +13,7 @@ function tablaLibros()
         foreach ($rows as $row) {
             $string .= "<tr><td>" . $row['id'] . "</td><td>" . $row['titulo'] . "</td><td>" . $row['autor'] . "</td><td>" . $row['paginas'] . 
       "</td><td><a href=\"../Controlador/eliminar.php?id=" . $row['id'] . "\">eliminar</a>" .  
-      "</td><td><a href=\"../Vista/modificar.php?id=" . $row['id'] . "\">modificar</a>" ."</td>";
+      "</td><td><a href=\"../Vista/modificar.php?id=" . $row['id'] . "&titulo=" . $row['titulo'] . "&autor=" . $row['autor'] . "&paginas=" . $row['paginas'] . "\">modificar</a>" ."</td>";
         }
         $string .= "</table>";
     }

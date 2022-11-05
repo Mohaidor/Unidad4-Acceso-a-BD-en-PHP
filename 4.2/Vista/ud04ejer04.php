@@ -18,6 +18,7 @@
         if (isset($_GET['submit']) && empty($_GET['id'])) {
             echo "<span style='color:red;'> <code><--</code> ¡Debes introducir un id!</span>";
         }
+        //Aqui se muestra error si se ha introducido el id no numérico
         if (isset($_GET['errorid'])) {
             echo "<span style='color:red;'> <code><--</code> ¡" .  $_GET['errorid']  . "!</span>";
         }
@@ -45,6 +46,7 @@
         if (isset($_GET['submit']) && empty($_GET['paginas'])) {
             echo "<span style='color:red;'> <code><--</code> ¡Debes introducir el número de páginas!</span>";
         }
+        //Aqui se muestra error si se ha introducido las páginas no numérico
         if (isset($_GET['errorpg'])) {
             echo "<span style='color:red;'> <code><--</code> ¡" . $_GET['errorpg'] . "!</span>";
         }
@@ -52,16 +54,19 @@
         <br>
         <br>
         <input type="submit" value="Introducir libro" name="submit" />
+        <!--Botón para ir a página de busqueda por titulo-->
         <a href="../Vista/verproductos.php"><input type="button" value="Buscar libro por título"></a>
         <hr>
         <br>
     </form>
     <?php
     require_once('../Controlador/cargar.php');
+    //muestra la tabla retornada por el controlador cargar.php
     echo tablaLibros();
     ?>
     <br>
     <?php
+    //Aqui se muestran los errores de la bbdd(PK duplicada)
     if (isset($_GET['errorbd'])) {
         echo  $_GET['errorbd'];
     } ?>

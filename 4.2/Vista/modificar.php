@@ -1,6 +1,9 @@
 <?php
 
-if (!empty($_GET['id']) && !empty($_GET['titulo']) && !empty($_GET['autor']) && !empty($_GET['paginas']) & is_numeric($_GET['paginas'])) {
+if (
+    isset($_GET['submit']) &&
+    !empty($_GET['id']) && !empty($_GET['titulo']) && !empty($_GET['autor']) && !empty($_GET['paginas']) && is_numeric($_GET['paginas'])
+) {
 
     $id = $_GET['id'];
     $titulo = $_GET['titulo'];
@@ -22,7 +25,7 @@ if (!empty($_GET['id']) && !empty($_GET['titulo']) && !empty($_GET['autor']) && 
 </head>
 
 <body style="background: gray;">
-    <h1>Modificar productos</h1>
+    <h1>Modificar libro</h1>
     <form action="" method="get">
 
         <input type="hidden" name="id" value="<?php echo isset($_GET['id']) ? $_GET['id'] : '' ?>">
@@ -55,7 +58,7 @@ if (!empty($_GET['id']) && !empty($_GET['titulo']) && !empty($_GET['autor']) && 
             echo "<span style='color:red;'> <code><--</code> ¡Debes introducir el número de páginas!</span>";
         }
         if (isset($_GET['submit']) && !empty($_GET['paginas']) && !is_numeric($_GET['paginas'])) {
-            echo "<span style='color:red;'> <code><--</code> ¡El número de páginas debe ser un número!</span>";
+            echo "<span style='color:red;'> <code><--</code> ¡Las páginas debe ser un número!</span>";
         } ?>
         <br>
         <br>
