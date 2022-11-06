@@ -1,15 +1,18 @@
 <?php
 
+//Si se ha pulsado submit, las paginas son un número y todas datos existen...
 if (
-    isset($_GET['submit']) &&
-    !empty($_GET['id']) && !empty($_GET['titulo']) && !empty($_GET['autor']) && !empty($_GET['paginas']) && is_numeric($_GET['paginas'])
+    isset($_GET['submit']) && is_numeric($_GET['paginas']) &&
+    !empty($_GET['id']) && !empty($_GET['titulo']) && !empty($_GET['autor']) && !empty($_GET['paginas'])
 ) {
 
+    //Obtención de valores
     $id = $_GET['id'];
     $titulo = $_GET['titulo'];
     $autor = $_GET['autor'];
     $paginas = $_GET['paginas'];
 
+    //llamada a controlador para eliminar
     require_once('../Controlador/update.php');
     actualizaLibro($id, $titulo, $autor, $paginas);
 }
@@ -21,13 +24,13 @@ if (
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ejercicio 4 - PDO</title>
 </head>
 
 <body style="background: gray;">
     <h1>Modificar libro</h1>
     <form action="" method="get">
-
+        <!--Se mantienen los values si se han introducido, errores si no-->
         <input type="hidden" name="id" value="<?php echo isset($_GET['id']) ? $_GET['id'] : '' ?>">
         <?php
         if (isset($_GET['submit']) && empty($_GET['id'])) {
@@ -57,6 +60,7 @@ if (
         if (isset($_GET['submit']) && empty($_GET['paginas'])) {
             echo "<span style='color:red;'> <code><--</code> ¡Debes introducir el número de páginas!</span>";
         }
+        //Se controla que sea un número, si no error
         if (isset($_GET['submit']) && !empty($_GET['paginas']) && !is_numeric($_GET['paginas'])) {
             echo "<span style='color:red;'> <code><--</code> ¡Las páginas debe ser un número!</span>";
         } ?>

@@ -55,7 +55,7 @@
         <br>
         <input type="submit" value="Introducir libro" name="submit" />
         <!--Botón para ir a página de busqueda por titulo-->
-        <a href="../Vista/verproductos.php"><input type="button" value="Buscar libro por título"></a>
+        <a href="../Vista/verLibros.php"><input type="button" value="Buscar libro por título"></a>
         <hr>
         <br>
     </form>
@@ -66,7 +66,7 @@
     ?>
     <br>
     <?php
-    //Aqui se muestran los errores de la bbdd(PK duplicada)
+    //Aqui se muestran los errores de la bbdd(PK duplicada,...)
     if (isset($_GET['errorbd'])) {
         echo  $_GET['errorbd'];
     } ?>

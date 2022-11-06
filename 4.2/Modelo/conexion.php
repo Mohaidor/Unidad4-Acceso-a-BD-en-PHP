@@ -1,6 +1,7 @@
 <?php
 class Conexion
 {
+    //Retorna una instancia de PDO con la conexión
     public function getConexion()
     {
         $host = "localhost";

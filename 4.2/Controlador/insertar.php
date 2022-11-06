@@ -1,59 +1,69 @@
 <?php
+
 $id = $_GET['id'];
 $titulo = $_GET['titulo'];
 $autor = $_GET['autor'];
 $paginas = $_GET['paginas'];
 
-$valores = "";
+
+
+//Aqui se genrera un string con una url dinámica en función de las variables y los errores
+//La instrodución de letras en los campos de numeros no genera una excepción por lo que se controla mediante is_numeric()
+$url = "ud04ejer04.php";
 if (empty($_GET['id'])) {
-    $valores = '?id=';
+    $url .= '?id=';
 } else {
-    $valores .= "?id=$id";
+    $url .= "?id=$id";
 }
 
 if (!empty($_GET['id']) && !is_numeric($id)) {
-    $valores .= '&errorid=' . urlencode('El id debe ser un número');
+    $url .= '&errorid=' . urlencode('El id debe ser un número');
 }
 
 
 if (empty($_GET['titulo'])) {
-    $valores .= '&titulo=';
+    $url .= '&titulo=';
 } else {
-    $valores .= "&titulo=$titulo";
+    $url .= "&titulo=$titulo";
 }
 if (empty($_GET['autor'])) {
-    $valores .= '&autor=';
+    $url .= '&autor=';
 } else {
-    $valores .= "&autor=$autor";
+    $url .= "&autor=$autor";
 }
 if (empty($_GET['paginas'])) {
-    $valores .= '&paginas=';
+    $url .= '&paginas=';
 } else {
-    $valores .= "&paginas=$paginas";
+    $url .= "&paginas=$paginas";
 }
 
 if (!empty($_GET['paginas']) && !is_numeric($paginas)) {
-    $valores .= '&errorpg=' . urlencode('Las páginas debe ser un número');
+    $url .= '&errorpg=' . urlencode('Las páginas debe ser un número');
 }
+$url .= '&submit=Introducir+libro';
 
 
-
-if (!empty($valores)  && !is_numeric($id) || empty($_GET['titulo']) || empty($_GET['autor']) || !is_numeric($paginas) ) {
-
-    $valores .= '&submit=Introducir+libro';
-    header("location:../Vista/ud04ejer04.php$valores");
+//Si esta la url correcta y tengo los valores INcorrectos
+if (!empty($url)  && !is_numeric($id) || empty($_GET['titulo']) || empty($_GET['autor']) || !is_numeric($paginas)) {
+    //retorna a la página principal con el estado del valor actual de las variables por GET
+    var_dump($url);
+    //var_dump();
+    header("location:../Vista/$url");
     exit();
 } else {
-    
+    //Aqui se llega si esta todo correcto y se realiza el INSERT mediante el modelo
     require_once('../Modelo/consulta.php');
     $myquery = new Consulta();
+    //llama al modelo para insertar; Si es correcto será 1. si no será el error
     $ok = $myquery->insertarLibro($id, $titulo, $autor, $paginas);
     var_dump($ok);
-    
+
     if ($ok == 1) {
+        //retorno a la principal y al recargar aparece el libro insertado
         header('location:../Vista/ud04ejer04.php');
         exit();
     } else {
+        //Si no retorno a la principal con error
         header("location:../Vista/ud04ejer04.php?errorbd=$ok");
         exit();
     }
